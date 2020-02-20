@@ -24,13 +24,13 @@ def move(my_history, their_history, my_score, their_score):
     Returns 'c' or 'b' for collude or betray.
     '''
     betray_count=0
-    for move in their_history[-8:]:
+    for move in their_history[-14:]:
       if move =='b':
         betray_count+=1
 
-    if betray_count>=2: # If the other player has betrayed within last 10 rounds, 
+    if betray_count>=3: # If the other player has betrayed within last 10 rounds, 
         return 'b'               # Betray.'b'
-
+ 
     else:
         if random.random()<0.001: # 5% of the other rounds
             return 'b'         # Betray

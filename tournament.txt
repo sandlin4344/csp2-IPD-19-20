@@ -15,19 +15,19 @@ Section 1 - Player vs. Player
 Each column shows pts//round earned against each other player:
              P0     P1     P2     P3
 vs. P0 :      0      0      0    100
-vs. P1 :      0      0      0   -187
+vs. P1 :     -5      0      0   -343
 vs. P2 :      0      0      0   -161
-vs. P3 :   -500   -284   -165      0
-TOTAL  :   -500   -284   -165   -248
+vs. P3 :   -500    -43   -165      0
+TOTAL  :   -505    -43   -165   -404
 --------------------------------------------------------------------------------
 Section 2 - Leaderboard
 --------------------------------------------------------------------------------
 Average points per round:
 Team name (P#):  Score      with strategy name
+E1        (P1):        -11 points with Collude unless excessive recent betrayal
 E2        (P2):        -42 points with Collude unless betrayed                 
-E3        (P3):        -62 points with Betray but change based on previous roun
-E1        (P1):        -71 points with Collude unless excessive recent betrayal
-E0        (P0):       -125 points with Collude                                 
+E3        (P3):       -101 points with Betray but change based on previous roun
+E0        (P0):       -127 points with Collude                                 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 example0--------------------------------------------------------------------------------
@@ -84,16 +84,13 @@ def move(my_history, their_history, my_score, their_score):
     Returns 'c' or 'b' for collude or betray.
     '''
     betray_count=0
-    for move in their_history[-8:]:
+    for move in their_history[-14:]:
       if move =='b':
         betray_count+=1
 
-    if betray_count>=5: # If the other player has betrayed within last 10 rounds, 
-        return 'b'               # Betray.
-    elif betray_count>=2:
-      if random.random()<.2:
-        return 'b'
-
+    if betray_count>=3: # If the other player has betrayed within last 10 rounds, 
+        return 'b'               # Betray.'b'
+ 
     else:
         if random.random()<0.001: # 5% of the other rounds
             return 'b'         # Betray
@@ -165,13 +162,13 @@ def move(my_history, their_history, my_score, their_score):
         return 'b'--------------------------------------------------------------------------------
 Section 3 - Game Data for Team E0
 --------------------------------------------------------------------------------
-0 pt//round: E0(P0) "Collude"
+-5 pt//round: E0(P0) "Collude"
 0 pt//ound: E1(P1) "Collude unless excessive recent betrayal"
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCcCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCBCCCCCCCCCCCCCCCCCCCCCCC
 
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCC
 
 --------------------------------------------------------------------------------
 0 pt//round: E0(P0) "Collude"
@@ -179,8 +176,11 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCC
 
 --------------------------------------------------------------------------------
 -500 pt//round: E0(P0) "Collude"
@@ -191,20 +191,20 @@ BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 
-cccccccccccccccccccccccccccccccccccccc
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+ccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBB
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 Section 3 - Game Data for Team E1
 --------------------------------------------------------------------------------
 0 pt//round: E1(P1) "Collude unless excessive recent betrayal"
-0 pt//ound: E0(P0) "Collude"
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+-5 pt//ound: E0(P0) "Collude"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCBCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCcCCCCCCCCCCCCCCCCCCCCCCC
 
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCC
 
 --------------------------------------------------------------------------------
 0 pt//round: E1(P1) "Collude unless excessive recent betrayal"
@@ -212,23 +212,17 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCC
 
 --------------------------------------------------------------------------------
--284 pt//round: E1(P1) "Collude unless excessive recent betrayal"
--187 pt//ound: E3(P3) "Betray but change based on previous round"
-cc   b  b ccc   b  b ccc b  bB  ccc    b  bCcc      b cccb  b b  ccc       bCcc 
-BBb   c  c BBb   c  c BBb c  cc  BBb    c  CBBb      c BBbc  c c  BBb       CBBb
+-43 pt//round: E1(P1) "Collude unless excessive recent betrayal"
+-343 pt//ound: E3(P3) "Betray but change based on previous round"
+cccbBBBBBBBBBBBBCcccbBBBBBBBBBBBBCcccbBBBBBBBBBBBBCcccbBBBBBBBBBBBBCcccbBBBBBBBB
+BBBbccccccccccccCBBBbccccccccccccCBBBbccccccccccccCBBBbccccccccccccCBBBbcccccccc
 
-     b ccc b  bB bCcc   b b  ccc        ccc        cccb   b   ccc  bB    ccc  bB
-      c BBb c  cc CBBb   c c  BBb        BBb        BBbc   c   BBb  cc    BBb  c
-
-  
-c 
+BBBBCcccbBBBBBBBBBBBBCcccbBBBB
+ccccCBBBbccccccccccccCBBBbcccc
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -239,8 +233,11 @@ Section 3 - Game Data for Team E2
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCC
 
 --------------------------------------------------------------------------------
 0 pt//round: E2(P2) "Collude unless betrayed"
@@ -248,11 +245,8 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCC
 
 --------------------------------------------------------------------------------
 -165 pt//round: E2(P2) "Collude unless betrayed"
@@ -260,8 +254,8 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 cbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBC
 BbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcC
 
-cbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCc
-BbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCB
+cbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCc
+BbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCB
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -275,20 +269,17 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-cccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBB
+ccccccccccccccccccccc
 
 --------------------------------------------------------------------------------
--187 pt//round: E3(P3) "Betray but change based on previous round"
--284 pt//ound: E1(P1) "Collude unless excessive recent betrayal"
-BBb   c  c BBb   c  c BBb c  cc  BBb    c  CBBb      c BBbc  c c  BBb       CBBb
-cc   b  b ccc   b  b ccc b  bB  ccc    b  bCcc      b cccb  b b  ccc       bCcc 
+-343 pt//round: E3(P3) "Betray but change based on previous round"
+-43 pt//ound: E1(P1) "Collude unless excessive recent betrayal"
+BBBbccccccccccccCBBBbccccccccccccCBBBbccccccccccccCBBBbccccccccccccCBBBbcccccccc
+cccbBBBBBBBBBBBBCcccbBBBBBBBBBBBBCcccbBBBBBBBBBBBBCcccbBBBBBBBBBBBBCcccbBBBBBBBB
 
-      c BBb c  cc CBBb   c c  BBb        BBb        BBbc   c   BBb  cc    BBb  c
-     b ccc b  bB bCcc   b b  ccc        ccc        cccb   b   ccc  bB    ccc  bB
-
-c 
-  
+ccccCBBBbccccccccccccCBBBbcccc
+BBBBCcccbBBBBBBBBBBBBCcccbBBBB
 
 --------------------------------------------------------------------------------
 -161 pt//round: E3(P3) "Betray but change based on previous round"
@@ -296,7 +287,7 @@ c
 BbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcC
 cbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBC
 
-BbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCB
-cbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCc
+BbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCBbcCB
+cbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCcbBCc
 
 --------------------------------------------------------------------------------
